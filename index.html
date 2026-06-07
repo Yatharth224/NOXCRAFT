@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOXCRAFT | Designing Timeless Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary": "#e3c282","surface-container-lowest": "#0d0e0f","on-background": "#e3e2e2",
+        "on-secondary": "#402d00","on-surface": "#e3e2e2","on-surface-variant": "#c4c7c7",
+        "surface": "#121414","surface-container": "#1e2020","surface-container-high": "#292a2a",
+        "surface-container-low": "#1a1c1c","outline-variant": "#444748","background": "#121414",
+        "on-tertiary-fixed-variant": "#454747"
+      },
+      fontFamily: {"display": ["Playfair Display"],"body": ["Montserrat"]},
+      spacing: {"margin-desktop": "80px","margin-mobile": "24px","container-max": "1440px","section-gap": "160px"}
+    }
+  }
+}
+</script>
+<style>
+  *{cursor:none!important}
+  body{background:#0a0a0a;color:#e3e2e2;overflow-x:hidden}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:inline-block;vertical-align:middle}
+  #cursor{width:12px;height:12px;background:#e3c282;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;box-shadow:0 0 12px rgba(227,194,130,.4)}
+  #cursor-ring{width:36px;height:36px;border:1px solid rgba(227,194,130,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.23,1,.32,1)}
+  .cursor-hover #cursor{transform:translate(-50%,-50%) scale(0);opacity:0}
+  .cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(227,194,130,.8);background:rgba(227,194,130,.05)}
+  
+  .gold-line::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:1px;background:#e3c282;transition:all .4s;transform:translateX(-50%)}
+  .gold-line:hover::after{width:100%}
+  
+  .flip-card{perspective:1200px;cursor:pointer}
+  .flip-inner{transition:transform .7s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;position:relative;width:100%;height:100%}
+  .flip-card:hover .flip-inner{transform:rotateY(180deg)}
+  .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .flip-back{transform:rotateY(180deg);background:#1e2020;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;border:1px solid rgba(227,194,130,.2)}
+  
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.on{opacity:1;transform:translateY(0)}
+  
+  .form-input-gold{background:transparent;border:none;border-bottom:1px solid rgba(227,194,130,.2);border-radius:0;padding:.75rem 0;width:100%;transition:all .4s;color:#e3e2e2;font-family:Montserrat}
+  .form-input-gold:focus{outline:none;border-bottom-color:#e3c282}
+  .input-grp{position:relative}
+  .input-grp label{position:absolute;left:0;top:.75rem;font-size:11px;letter-spacing:.2em;font-weight:600;color:rgba(196,199,199,.4);pointer-events:none;transition:all .4s;font-family:Montserrat;text-transform:uppercase}
+  .input-grp:focus-within label,.input-grp input:not(:placeholder-shown)~label,.input-grp textarea:not(:placeholder-shown)~label{top:-18px;font-size:9px;color:#e3c282;letter-spacing:.3em}
+  
+  nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .nav-active{color:#e3c282 !important}
+  .nav-active::after{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#e3c282;border-radius:50%}
+  
+  @media(max-width:768px){.mob-hide{display:none}}
+  .grayscale-hover{filter:grayscale(1);transition:filter 1s}
+  .grayscale-hover:hover{filter:grayscale(0)}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
+<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
+  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
+  <div class="mob-hide flex items-center gap-10">
+    <a href="projects.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Projects</a>
+    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Studio</a>
+    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Contact</a>
+  </div>
+  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
+</nav>
+</header>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div class="pt-0">
+  <!-- Hero -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-black/80 z-10"></div>
+      <img id="hero-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt4UfZdSmfcCDBzm6tSSReDvMjCmfNn4g8oqwiVY9tjanc6RK_AHRX1eH4pwhEWiBc2ZvYnkWDV0EbEwqUlAhDrXqTmvBgaHUk-vYhvPG4V3EEfqX5Ap0p2GYfq3LxfjJx8KcQeuv5tmZ3lpSQVOJSxn0fR3pqZQeyqGqZhCu0cb3eplgG3KXe5cDnXAblsl_xc9PvDRVOn1KhLyHyK_qc53pPO0qvAq3GV1teP0WKWG1epMBmaRZ7GHPFXBSYtVeFOQaj0VPZ82M" alt="" class="w-full h-full object-cover scale-110"/>
+    </div>
+    <div class="relative z-20 text-center max-w-4xl px-6 flex flex-col items-center gap-7">
+      <p class="reveal text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body">ESTABLISHED IN 2024 — ARCHITECTURAL EXCELLENCE</p>
+      <h1 class="reveal font-display text-[48px] md:text-[84px] leading-none tracking-tight text-[#e3e2e2]">Designing Timeless <br class="hidden md:block"/> Architecture</h1>
+      <p class="reveal font-body text-[18px] font-light text-[#c4c7c7] max-w-2xl leading-relaxed">Crafting monumental structures that balance brutalist strength with refined elegance. Every line is intentional, every shadow a statement of permanence.</p>
+      <a href="projects.html" class="reveal mt-4 text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-12 py-5 inline-flex items-center gap-3 hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-500 group">
+        Explore Projects <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <span class="material-symbols-outlined text-[#e3c282] opacity-50">expand_more</span>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="max-w-[1440px] mx-auto px-6 md:px-20 py-40 featured-works">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal featured-header">
+      <div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mb-3 font-body">PORTFOLIO</p><h2 class="font-display text-[42px] text-[#e3e2e2]">Selected Works</h2></div>
+      <a href="projects.html" class="text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] gold-line relative pb-1">VIEW ALL COLLECTIONS</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Card 1 -->
+      <div class="md:col-span-8 flip-card featured-card h-[480px]">
+        <div class="flip-inner">
+          <div class="flip-front overflow-hidden border-t border-[#e3c282]/10">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0qkXz0qbFo7pvEn--yWMyoZP0N9OvxaMmQFWXBoVlRTDp7jHQsdg4SBavzVGxHsdomEWy1TsQQUA2_ct6DbFZc7Wo7xUskzrCf1N6TWHRQuTxOT-hp_NE_P_tOzy2b4vmjArAjIpJjbKB6csS5pijK32bN6GJPd_iaePatl95rLQCqmxK62MGN1C1C85yUsYWndO8UOq8gX6d1bSpReX9CI6zXiuNLH907n-UNs5XJlAkrJJEyV8meP7YTUslcEFqUN42od8TsJo" alt="The Obsidian Villa" class="w-full h-full object-cover"/>
+            <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
+              <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mb-2 font-body">RESIDENTIAL | 2023</p>
+              <h3 class="font-display text-[32px] text-[#e3e2e2]">The Obsidian Villa</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="font-display text-[28px] text-[#e3c282] mb-3">The Obsidian Villa</h3>
+            <p class="text-[10px] uppercase tracking-widest text-[#c4c7c7] mb-5 font-body">Atacama, Chile · 450 sqm</p>
+            <p class="font-body text-[15px] text-[#c4c7c7] mb-7">A monolith of raw sandstone and blackened steel integrated into the desert landscape.</p>
+            <a href="project-detail.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-8 py-3 text-[#e3c282] hover:bg-[#e3c282] hover:text-[#402d00] transition-all">View Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="md:col-span-4 flip-card featured-card h-[480px] md:mt-24">
+        <div class="flip-inner">
+          <div class="flip-front overflow-hidden border-t border-[#e3c282]/10">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzC8slRwb7l-RQMnt6n2tNURBx6nJemZi1saQoLG3_6qNLNylI5U9O9KLWo-XzwL7Qx3L3hNJA6QlvJRU_kHTnu-frlUt-43RaflbEpfPS8aVCENwRh0awRYljyjR8Y-U7TNsEtLzr2hH8-JSSDn5m-swlAooWr8hK4fAlTV8S6IREvieGwZxhZeqkB_T0jubfHXFoEpw-BJvuX3rMPzr5mg-K8RfhQ6UpGiQ0nI59DrlKNxBgWxFAg5ai58t1u5E11V81RXyDtLQ" alt="" class="w-full h-full object-cover"/>
+            <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/80 to-transparent w-full">
+              <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mb-2 font-body">COMMERCIAL | 2022</p>
+              <h3 class="font-display text-[32px] text-[#e3e2e2]">Monolith Atrium</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3 class="font-display text-[28px] text-[#e3c282] mb-3">Monolith Atrium</h3>
+            <p class="text-[10px] uppercase tracking-widest text-[#c4c7c7] mb-5 font-body">Berlin, Germany · 1200 sqm</p>
+            <p class="font-body text-[15px] text-[#c4c7c7] mb-7">A vertical study of brutalist spiral forms and soft golden lighting in a corporate sanctuary.</p>
+            <a href="project-detail.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-8 py-3 text-[#e3c282] hover:bg-[#e3c282] hover:text-[#402d00] transition-all">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="max-w-[1440px] mx-auto px-6 md:px-20 py-32 border-b border-[#444748]/30">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+      <div class="reveal"><div class="font-display text-[64px] text-[#e3e2e2]" data-stat>12</div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mt-2 font-body">GLOBAL AWARDS</p></div>
+      <div class="reveal" style="transition-delay:100ms"><div class="font-display text-[64px] text-[#e3e2e2]" data-stat>84</div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mt-2 font-body">PROJECTS COMPLETED</p></div>
+      <div class="reveal" style="transition-delay:200ms"><div class="font-display text-[64px] text-[#e3e2e2]" data-stat>06</div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mt-2 font-body">COUNTRIES ACTIVE</p></div>
+      <div class="reveal" style="transition-delay:300ms"><div class="font-display text-[64px] text-[#e3e2e2]" data-stat>15</div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mt-2 font-body">YEARS OF RIGOR</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-5">
+        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
+        <p class="font-body text-[15px] text-[#454747] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-x-20 gap-y-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Berlin</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Reykjavík</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Tokyo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Vimeo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#454747] font-body">© 2024 NOXCRAFT ARCHITECTURE. ALL RIGHTS RESERVED.</p>
+      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ─── CURSOR ───────────────────────────────────────────
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(animRing);}
+animRing();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[onclick]'))document.body.classList.add('cursor-hover');else document.body.classList.remove('cursor-hover');});
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal:not(.on)').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// ─── HERO PARALLAX ───────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const img=document.getElementById('hero-img');
+  if(img)img.style.transform=`scale(1.1) translateY(${window.scrollY*.3}px)`;
+  const nav=document.getElementById('nav-inner');
+  if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
+  else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+});
+
+// ─── GSAP ENHANCEMENTS ────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+// Card hover lift with shadow
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    gsap.to(card, { y: -8, duration: 0.5, ease: 'power3.out' });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { y: 0, duration: 0.5, ease: 'power3.out' });
+  });
+});
+
+// Stats number counter
+document.querySelectorAll('[data-stat]').forEach(stat => {
+  ScrollTrigger.create({
+    trigger: stat,
+    onEnter: () => {
+      let value = parseInt(stat.textContent);
+      gsap.to(stat, {
+        textContent: value,
+        duration: 2.5,
+        snap: { textContent: 1 },
+        ease: 'power2.inOut'
+      });
+    },
+    once: true
+  });
+});
+
+// Featured card entrance animation
+gsap.utils.toArray('.featured-card').forEach((card, index) => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: 'top 85%',
+      once: true
+    },
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    delay: index * 0.15,
+    ease: 'power3.out'
+  });
+});
+</script>
+</body>
+</html>

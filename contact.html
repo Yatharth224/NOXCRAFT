@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOXCRAFT | Contact</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary": "#e3c282","surface-container-lowest": "#0d0e0f","on-background": "#e3e2e2",
+        "on-secondary": "#402d00","on-surface": "#e3e2e2","on-surface-variant": "#c4c7c7",
+        "surface": "#121414","surface-container": "#1e2020","surface-container-high": "#292a2a",
+        "surface-container-low": "#1a1c1c","outline-variant": "#444748","background": "#121414",
+        "on-tertiary-fixed-variant": "#454747"
+      },
+      fontFamily: {"display": ["Playfair Display"],"body": ["Montserrat"]},
+      spacing: {"margin-desktop": "80px","margin-mobile": "24px","container-max": "1440px","section-gap": "160px"}
+    }
+  }
+}
+</script>
+<style>
+  *{cursor:none!important}
+  body{background:#0a0a0a;color:#e3e2e2;overflow-x:hidden}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:inline-block;vertical-align:middle}
+  #cursor{width:12px;height:12px;background:#e3c282;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;box-shadow:0 0 12px rgba(227,194,130,.4)}
+  #cursor-ring{width:36px;height:36px;border:1px solid rgba(227,194,130,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.23,1,.32,1)}
+  .cursor-hover #cursor{transform:translate(-50%,-50%) scale(0);opacity:0}
+  .cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(227,194,130,.8);background:rgba(227,194,130,.05)}
+  
+  .gold-line::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:1px;background:#e3c282;transition:all .4s;transform:translateX(-50%)}
+  .gold-line:hover::after{width:100%}
+  
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.on{opacity:1;transform:translateY(0)}
+  
+  .form-input-gold{background:transparent;border:none;border-bottom:1px solid rgba(227,194,130,.2);border-radius:0;padding:.75rem 0;width:100%;transition:all .4s;color:#e3e2e2;font-family:Montserrat}
+  .form-input-gold:focus{outline:none;border-bottom-color:#e3c282}
+  .input-grp{position:relative}
+  .input-grp label{position:absolute;left:0;top:.75rem;font-size:11px;letter-spacing:.2em;font-weight:600;color:rgba(196,199,199,.4);pointer-events:none;transition:all .4s;font-family:Montserrat;text-transform:uppercase}
+  .input-grp:focus-within label,.input-grp input:not(:placeholder-shown)~label,.input-grp textarea:not(:placeholder-shown)~label{top:-18px;font-size:9px;color:#e3c282;letter-spacing:.3em}
+  
+  nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .nav-active{color:#e3c282 !important}
+  .nav-active::after{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#e3c282;border-radius:50%}
+  
+  @media(max-width:768px){.mob-hide{display:none}}
+  .grayscale-hover{filter:grayscale(1);transition:filter 1s}
+  .grayscale-hover:hover{filter:grayscale(0)}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
+<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
+  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
+  <div class="mob-hide flex items-center gap-10">
+    <a href="projects.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Projects</a>
+    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Studio</a>
+    <a href="contact.html" class="nav-link nav-active text-[11px] font-medium uppercase tracking-widest text-[#e3c282] transition-colors relative gold-line">Contact</a>
+  </div>
+  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
+</nav>
+</header>
+
+<!-- ═══ CONTACT PAGE ═══ -->
+<div class="pt-36 pb-40 relative min-h-screen">
+  <div class="fixed top-0 right-0 w-1/3 h-screen -z-10 opacity-15 pointer-events-none overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWKuuJnBYmj4kHkkx87HeDdR8CTYZ0-CX6qbcFkhiXuvWV9wuTnxDARL1RgcBSQjddTHkHWkqqcHXBaavPKNEoi6BNHO4uvdXSY24iN6gFvEdSr5Gj9LqQLD0aNEn2OqNnB9iR4Su_xycooNCYUhW7L1DDtEwyQ_PUUqFz7AekgoA28kfg-VASHL-wbvplrucbRGgi8Ph-RmvRmEybHyjAAOEPovIBzFRj97A0kRT7urgdMRkzYN4JMk38Ta4HwXhomGnIU8ZEf6o" alt="" class="w-full h-full object-cover grayscale brightness-50 contrast-125"/>
+    <div class="absolute inset-0 bg-gradient-to-l from-[#e3c282]/10 to-transparent"></div>
+  </div>
+
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20">
+    <header class="text-center mb-32 max-w-4xl mx-auto reveal">
+      <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-7">START A CONVERSATION</p>
+      <h1 class="font-display text-[48px] md:text-[84px] tracking-tight mb-7 leading-tight">Let's shape the <br class="hidden md:block"/> <span class="italic font-normal">unseen future</span> together.</h1>
+      <p class="font-body text-[18px] font-light text-[#c4c7c7]/80">We partner with visionary clients to create iconic spaces. Tell us about your project, your ambition, and your timeline.</p>
+    </header>
+
+    <div class="max-w-3xl mx-auto reveal">
+      <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+        <div class="input-grp"><input class="form-input-gold" id="name" type="text" placeholder=" " required/><label for="name">Full Name</label></div>
+        <div class="input-grp"><input class="form-input-gold" id="email" type="email" placeholder=" " required/><label for="email">Email Address</label></div>
+        <div class="input-grp"><input class="form-input-gold" id="phone" type="tel" placeholder=" "/><label for="phone">Phone Number</label></div>
+        <div class="input-grp"><input class="form-input-gold" id="instagram" type="text" placeholder=" "/><label for="instagram">Instagram @</label></div>
+        <div class="input-grp md:col-span-2 mt-4"><textarea class="form-input-gold resize-none" id="message" rows="4" placeholder=" " required></textarea><label for="message">Project Brief / Message</label></div>
+        <div class="md:col-span-2 pt-10 text-center">
+          <button type="submit" id="submitBtn" class="relative inline-flex items-center justify-center py-5 px-16 border border-[#e3c282]/50 hover:border-[#e3c282] overflow-hidden group transition-all duration-500">
+            <span class="absolute inset-0 bg-[#e3c282] -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+            <span id="btnText" class="relative z-10 text-[11px] font-medium uppercase tracking-[.3em] text-[#e3e2e2] group-hover:text-[#402d00] transition-colors duration-300 font-body">Send Inquiry</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Offices -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-32 pt-20 border-t border-[#e3c282]/10 reveal">
+      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">LONDON STUDIO</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">The Brutalist Exchange, 4th Floor<br/>Southbank, London SE1<br/>United Kingdom</p></div>
+      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">TOKYO OUTPOST</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Minami-Aoyama Glass House<br/>Minato-ku, Tokyo 107-0062<br/>Japan</p></div>
+      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">CONTACT DIRECT</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">general@noxcraft.arch<br/>+44 (0) 20 7946 0123</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-5">
+        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
+        <p class="font-body text-[15px] text-[#454747] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-x-20 gap-y-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Berlin</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Reykjavík</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Tokyo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Vimeo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#454747] font-body">© 2024 NOXCRAFT ARCHITECTURE. ALL RIGHTS RESERVED.</p>
+      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR ───────────────────────────────────────────
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(animRing);}
+animRing();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[onclick]'))document.body.classList.add('cursor-hover');else document.body.classList.remove('cursor-hover');});
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal:not(.on)').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// ─── CONTACT FORM ─────────────────────────────────────
+document.getElementById('contactForm')?.addEventListener('submit',function(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  const txt=document.getElementById('btnText');
+  txt.textContent='TRANSMITTING...';btn.disabled=true;btn.style.opacity='.6';
+  setTimeout(()=>{txt.textContent='INQUIRY RECEIVED ✓';btn.style.opacity='1';
+    setTimeout(()=>{this.reset();txt.textContent='Send Inquiry';btn.disabled=false;},2500);
+  },1500);
+});
+
+// ─── NAV PARALLAX ───────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav-inner');
+  if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
+  else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+});
+</script>
+</body>
+</html>

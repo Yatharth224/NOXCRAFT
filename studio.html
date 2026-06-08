@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOXCRAFT | Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary": "#e3c282","surface-container-lowest": "#0d0e0f","on-background": "#e3e2e2",
+        "on-secondary": "#402d00","on-surface": "#e3e2e2","on-surface-variant": "#c4c7c7",
+        "surface": "#121414","surface-container": "#1e2020","surface-container-high": "#292a2a",
+        "surface-container-low": "#1a1c1c","outline-variant": "#444748","background": "#121414",
+        "on-tertiary-fixed-variant": "#454747"
+      },
+      fontFamily: {"display": ["Playfair Display"],"body": ["Montserrat"]},
+      spacing: {"margin-desktop": "80px","margin-mobile": "24px","container-max": "1440px","section-gap": "160px"}
+    }
+  }
+}
+</script>
+<style>
+  *{cursor:none!important}
+  body{background:#0a0a0a;color:#e3e2e2;overflow-x:hidden}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:inline-block;vertical-align:middle}
+  #cursor{width:12px;height:12px;background:#e3c282;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;box-shadow:0 0 12px rgba(227,194,130,.4)}
+  #cursor-ring{width:36px;height:36px;border:1px solid rgba(227,194,130,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.23,1,.32,1)}
+  .cursor-hover #cursor{transform:translate(-50%,-50%) scale(0);opacity:0}
+  .cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(227,194,130,.8);background:rgba(227,194,130,.05)}
+  
+  .gold-line::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:1px;background:#e3c282;transition:all .4s;transform:translateX(-50%)}
+  .gold-line:hover::after{width:100%}
+  
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.on{opacity:1;transform:translateY(0)}
+  
+  nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .nav-active{color:#e3c282 !important}
+  .nav-active::after{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#e3c282;border-radius:50%}
+  
+  @media(max-width:768px){.mob-hide{display:none}}
+  .grayscale-hover{filter:grayscale(1);transition:filter 1s}
+  .grayscale-hover:hover{filter:grayscale(0)}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
+<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
+  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
+  <div class="mob-hide flex items-center gap-10">
+    <a href="projects.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Projects</a>
+    <a href="studio.html" class="nav-link nav-active text-[11px] font-medium uppercase tracking-widest text-[#e3c282] transition-colors relative gold-line">Studio</a>
+    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Contact</a>
+  </div>
+  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
+</nav>
+</header>
+
+<!-- ═══ STUDIO PAGE ═══ -->
+<div class="pt-32">
+  <!-- Hero -->
+  <section class="max-w-[1440px] mx-auto px-6 md:px-20 min-h-[600px] flex flex-col md:flex-row items-center gap-20">
+    <div class="w-full md:w-1/2 space-y-7 reveal">
+      <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body">ESTABLISHED MMXXIV</p>
+      <h1 class="font-display text-[48px] md:text-[84px] leading-tight">Silent Authority. Structural Integrity.</h1>
+      <p class="font-body text-[18px] font-light text-[#c4c7c7] max-w-xl leading-relaxed">NOXCRAFT is an architectural atelier dedicated to the pursuit of pure form and essential living. We do not design buildings; we curate spatial experiences that command presence through silence.</p>
+      <a href="#vision" class="text-[11px] font-medium uppercase tracking-widest border-b border-[#e3c282] pb-1 hover:text-[#e3c282] transition-colors font-body">Learn more about us</a>
+    </div>
+    <div class="w-full md:w-1/2 h-[560px] overflow-hidden reveal">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdA61JACBUL6EgmrwG6HW47AlAAlRYY00YZABpGAfm5XUFKTAGH7jNhO1l0HsyiQ7NhXkOzXEPpHG1_UscqXGWpoiOp2XMbtXQacPb8zKrs_rFM95PPNGmqWdj7fk4iVPRyQX4ZnRhrF-BmJIIwVw5fGm-RM9Ki67UfWdqBKW1c60FXv8hMKipyfxC6kQLCVHEDPDWnYQfOtbIuH5nCJXmr4gBz-1tnTM1fSQY9-UsZxjRYKXEC_juydMw0SHoTxQ4W9jeLas5tW0" alt="" class="w-full h-full object-cover grayscale-hover"/>
+    </div>
+  </section>
+
+  <!-- Vision & Mission -->
+  <section class="mt-40 bg-[#0d0e0f] py-32 border-y border-[#e3c282]/10" id="vision">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-32">
+      <div class="space-y-10 reveal">
+        <div class="flex items-center gap-5"><span class="w-10 h-px bg-[#e3c282]"></span><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body">THE VISION</p></div>
+        <h2 class="font-display text-[42px] text-[#e3e2e2]">Architecting the Void.</h2>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">We envision a world where architecture acts as a quiet frame for human existence. By prioritizing negative space over ornamentation, we create environments that foster clarity and a profound sense of place.</p>
+        <div class="h-72 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALKf3E6ABY5QrN6Ds6kRl6x_8MLzIn1AXW15M4T90wODrUH54uVebHqSNq_EHOZX1NDA31vYs_29LKtlwRrXgxPNPaqYlW7dkFXvKoOHpFej9Uc6gP07qmC9Dq2Ihej7dWRSlgySjnJE2AvKl5-aivKDmjy8h-DAMyfn6iNVoiD0eY7H665O6sg4u3QTif2JHOozffcN1FMgyUj8LUMGU1lsxLQ8AHA7gsXUxTJjPqeEm1sS65LOcXlltE--fgVkUqTFXsynyhqD8" alt="" class="w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-1000"/></div>
+      </div>
+      <div class="space-y-10 md:mt-24 reveal">
+        <div class="flex items-center gap-5"><span class="w-10 h-px bg-[#e3c282]"></span><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body">THE MISSION</p></div>
+        <h2 class="font-display text-[42px] text-[#e3e2e2]">Precision in Every Grain.</h2>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Our mission is the relentless pursuit of technical perfection. Every joint, every shadow gap, and every material transition is executed with surgical precision.</p>
+        <div class="h-72 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7WZ0ER5BOdhKD7z6J2GrpNbO4ZgB3aL9rmWg1WO2T_dATh0d5GkvFV_-thywyYiFDJ7zhxMhf57ObscJ8MJkb1vOpm1aPm3XB6Xpl0waH5Fu9ePhg0kXgKEz4AQmgwjfa2IneXVzK0yCrMh9inAZSbiZ05I87e5eHSfStu51UmgEZmB0W-d39shJNfOD4Tuv1ikop5uMnDSX0aPVe3j5ayq0cUVgI6YPaJBaMh2gTFcIgp49nPvHLbH3XT3iEcyiVc_2z0tMaWBg" alt="" class="w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-1000"/></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="mt-40 max-w-[1440px] mx-auto px-6 md:px-20 reveal">
+    <div class="flex flex-col lg:flex-row border border-[#444748]/30">
+      <div class="w-full lg:w-1/2 h-[560px] overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEwAIxen_6ru9dKm36KMVNOsDgu6sw-tDxxD_FPpyo0RKyZ9PHSqgFimzDBdwTFZ22jSdSuMgZPUYbe6SyQdbN9VsQOKSVIS-z4-KGEIcsMtEPge5pg00wQ1rc4FyOSJGSd9cFi0jv0MOdJl4J9V-pgvjpEboQ2k9u0Hx7TXO7oE3EPfTufb_yqyYMeUko3OYvDXr8He0C4W6rQzsUbQf7U3BQilMfx47nVaz2Ofr-X9pq3ULdiOo-DFmfGn8P5pHjlxWBpRXU-Jc" alt="" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"/></div>
+      <div class="w-full lg:w-1/2 p-12 md:p-20 flex flex-col justify-center space-y-10 bg-[#1e2020]">
+        <div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-3">THE FOUNDER</p><h2 class="font-display text-[52px] text-[#e3e2e2]">Julian Nox</h2><p class="text-[11px] font-medium uppercase tracking-[.3em] text-[#c4c7c7] font-body mt-1">Principal Architect & Visionary</p></div>
+        <div class="border-l border-[#e3c282]/30 pl-10"><p class="font-display text-[18px] italic text-[#e3e2e2] leading-relaxed">"Architecture is not about building walls; it is about defining the light that falls between them."</p></div>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">With over two decades of experience across Europe and Asia, Julian Nox founded NOXCRAFT to escape the noise of commercial architecture. His work has been recognized by the RIBA and has appeared in Architectural Digest and Monocle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="mt-40 max-w-[1440px] mx-auto px-6 md:px-20 mb-32">
+    <div class="text-center mb-16 reveal"><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-3">OUR CORE PILLARS</p><h2 class="font-display text-[52px] text-[#e3e2e2]">The Nox Standards</h2></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-[#1a1c1c] p-12 border border-[#444748]/20 hover:border-[#e3c282]/30 transition-all duration-500 space-y-5 reveal">
+        <span class="material-symbols-outlined text-[40px] text-[#e3c282]" style="font-variation-settings:'FILL' 1">architecture</span>
+        <h3 class="font-display text-[32px] text-[#e3e2e2]">Material Honesty</h3>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">We let stone be stone and steel be steel. No veneers, no imitations—only the raw, unadorned truth of construction.</p>
+      </div>
+      <div class="bg-[#1a1c1c] p-12 border border-[#444748]/20 hover:border-[#e3c282]/30 transition-all duration-500 space-y-5 reveal md:translate-y-12">
+        <span class="material-symbols-outlined text-[40px] text-[#e3c282]" style="font-variation-settings:'FILL' 1">light_mode</span>
+        <h3 class="font-display text-[32px] text-[#e3e2e2]">Luminous Path</h3>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Light is our primary building material. We sculpt openings to capture the sun's trajectory throughout the seasons.</p>
+      </div>
+      <div class="bg-[#1a1c1c] p-12 border border-[#444748]/20 hover:border-[#e3c282]/30 transition-all duration-500 space-y-5 reveal">
+        <span class="material-symbols-outlined text-[40px] text-[#e3c282]" style="font-variation-settings:'FILL' 1">draw</span>
+        <h3 class="font-display text-[32px] text-[#e3e2e2]">Eternal Geometry</h3>
+        <p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Trends are ephemeral; geometry is eternal. Our designs utilize golden ratios to ensure timeless relevance.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-5">
+        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
+        <p class="font-body text-[15px] text-[#454747] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-x-20 gap-y-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Berlin</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Reykjavík</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Tokyo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Vimeo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#454747] font-body">© 2024 NOXCRAFT ARCHITECTURE. ALL RIGHTS RESERVED.</p>
+      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR ───────────────────────────────────────────
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(animRing);}
+animRing();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[onclick]'))document.body.classList.add('cursor-hover');else document.body.classList.remove('cursor-hover');});
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal:not(.on)').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// ─── NAV PARALLAX ───────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav-inner');
+  if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
+  else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+});
+</script>
+</body>
+</html>

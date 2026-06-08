@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOXCRAFT | Project Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary": "#e3c282","surface-container-lowest": "#0d0e0f","on-background": "#e3e2e2",
+        "on-secondary": "#402d00","on-surface": "#e3e2e2","on-surface-variant": "#c4c7c7",
+        "surface": "#121414","surface-container": "#1e2020","surface-container-high": "#292a2a",
+        "surface-container-low": "#1a1c1c","outline-variant": "#444748","background": "#121414",
+        "on-tertiary-fixed-variant": "#454747"
+      },
+      fontFamily: {"display": ["Playfair Display"],"body": ["Montserrat"]},
+      spacing: {"margin-desktop": "80px","margin-mobile": "24px","container-max": "1440px","section-gap": "160px"}
+    }
+  }
+}
+</script>
+<style>
+  *{cursor:none!important}
+  body{background:#0a0a0a;color:#e3e2e2;overflow-x:hidden}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:inline-block;vertical-align:middle}
+  #cursor{width:12px;height:12px;background:#e3c282;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;box-shadow:0 0 12px rgba(227,194,130,.4)}
+  #cursor-ring{width:36px;height:36px;border:1px solid rgba(227,194,130,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.23,1,.32,1)}
+  .cursor-hover #cursor{transform:translate(-50%,-50%) scale(0);opacity:0}
+  .cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(227,194,130,.8);background:rgba(227,194,130,.05)}
+  
+  .gold-line::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:1px;background:#e3c282;transition:all .4s;transform:translateX(-50%)}
+  .gold-line:hover::after{width:100%}
+  
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.on{opacity:1;transform:translateY(0)}
+  
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee{animation:marquee 40s linear infinite}
+  .marquee:hover{animation-play-state:paused}
+  
+  nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .nav-active{color:#e3c282 !important}
+  .nav-active::after{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#e3c282;border-radius:50%}
+  
+  @media(max-width:768px){.mob-hide{display:none}}
+  .grayscale-hover{filter:grayscale(1);transition:filter 1s}
+  .grayscale-hover:hover{filter:grayscale(0)}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
+<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
+  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
+  <div class="mob-hide flex items-center gap-10">
+    <a href="projects.html" class="nav-link nav-active text-[11px] font-medium uppercase tracking-widest text-[#e3c282] transition-colors relative gold-line">Projects</a>
+    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Studio</a>
+    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Contact</a>
+  </div>
+  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
+</nav>
+</header>
+
+<!-- ═══ PROJECT DETAIL PAGE ═══ -->
+<div>
+  <!-- Back button -->
+  <a href="projects.html" class="fixed top-8 left-6 md:left-20 z-[60] flex items-center group">
+    <div class="flex items-center bg-transparent border border-[#e3c282] overflow-hidden transition-all duration-500 hover:bg-[#e3c282]" style="max-width:48px;transition:max-width .6s cubic-bezier(.19,1,.22,1)" onmouseenter="this.style.maxWidth='220px'" onmouseleave="this.style.maxWidth='48px'">
+      <div class="min-w-[46px] h-11 flex items-center justify-center text-[#e3c282] group-hover:text-[#402d00]"><span class="material-symbols-outlined text-lg">arrow_back</span></div>
+      <span class="text-[11px] font-medium uppercase tracking-widest text-[#e3c282] group-hover:text-[#402d00] pr-5 whitespace-nowrap">Back to Projects</span>
+    </div>
+  </a>
+
+  <!-- Hero -->
+  <section class="relative h-screen overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-vRNhgcjT_QKRH1zKdZNKDFNzc5M1N9NcDh7VQAeqF4BSeDzHEmF8XjiQmCbxl5QJM0q-EdkazqkGbAcyZ4RuQJFMrYf2ycnZWTrcDoDDS1eYZoDKhsE-NbwaOIjgFoe8l--NSDUFZ2iucMtoc9Snos1biwnAsCHH1LedzHwbu9O8uvYVJbOUGhBVKM56kHBMvt1sWVPnxIXjYr83jIi12qIgfzqj5S8b8RvUvTzb4qLKrCz9YbV4ar8FXcaKdY59a5_vreYsJq4" alt="" class="absolute inset-0 w-full h-[120%] object-cover -top-[10%]"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+    <div class="absolute bottom-16 md:bottom-24 left-6 md:left-20">
+      <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] mb-4 font-body">RESIDENTIAL · SWITZERLAND</p>
+      <h1 class="font-display text-[48px] md:text-[84px] tracking-tight text-[#e3e2e2] mb-5">THE OBSIDIAN VILLA</h1>
+      <div class="flex gap-8 border-t border-[#e3c282]/20 pt-6">
+        <div><p class="text-[9px] uppercase tracking-widest text-[#c4c7c7] mb-1 font-body">COMPLETION</p><p class="text-[13px] font-medium uppercase tracking-widest font-body">2023</p></div>
+        <div><p class="text-[9px] uppercase tracking-widest text-[#c4c7c7] mb-1 font-body">TOTAL AREA</p><p class="text-[13px] font-medium uppercase tracking-widest font-body">1,450 SQM</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="max-w-[1440px] mx-auto px-6 md:px-20 mt-40 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+    <div class="md:col-span-4 sticky top-32">
+      <h2 class="font-display text-[36px] text-[#e3e2e2] mb-6">Structural Elegance</h2>
+      <div class="w-20 h-px bg-[#e3c282] mb-8"></div>
+      <div class="space-y-10">
+        <div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body mb-2">LOCATION</p><p class="font-body text-[18px] font-light text-[#e3e2e2]">Lake Lugano, Swiss Alps</p></div>
+        <div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body mb-2">COLLABORATORS</p><p class="font-body text-[18px] font-light text-[#e3e2e2]">Sarto Engineering, Atelier Noire</p></div>
+        <div><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body mb-2">TYPOLOGY</p><p class="font-body text-[18px] font-light text-[#e3e2e2]">Private Residential Luxury</p></div>
+      </div>
+    </div>
+    <div class="md:col-span-7 md:col-start-6 space-y-7">
+      <p class="font-body text-[18px] font-light text-[#e3e2e2] leading-relaxed"><span class="float-left text-[56px] font-display text-[#e3c282] mr-3 leading-none">P</span>erched above the crystalline waters of Lake Lugano, The Obsidian Villa represents a dialogue between geometric severity and the organic fluidity of the alpine landscape. The project challenged our studio to create a dwelling that maximizes panoramic transparency while maintaining absolute acoustic and visual privacy.</p>
+      <p class="font-body text-[16px] text-[#c4c7c7] leading-relaxed">The structural core utilizes a cantilevered steel frame finished in matte-black powder coating, supporting expansive triple-glazed panels that disappear into the floor. The interior finishes—honed Nero Marquina marble and hand-charred Yakisugi cedar—create a tactile sanctuary that shifts its character with the solar cycle.</p>
+      <button class="text-[11px] font-medium uppercase tracking-widest text-[#e3c282] gold-line relative pb-1 font-body mt-4 block">Download Full Monograph</button>
+    </div>
+  </section>
+
+  <!-- Gallery marquee -->
+  <section class="mt-40 overflow-hidden bg-[#0d0e0f] py-16 relative">
+    <div class="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+    <div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+    <div class="flex whitespace-nowrap marquee gap-6">
+      <div class="w-[42vw] h-[400px] flex-shrink-0 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6qW_2q20fPRyR7COfAZGqsDW2x2fbu0dISrHmNJbJDFmsCxMKpoahSi1uVmrj0RM_6YA04qtqxVs3GkqcY74ETuTM0Y7nOCIy_5huQAORFpEbPZnJJZ8UHIWMyqOGhCa5u9E1X137Ms1ABWmXxVHH6XwVOHu50zfHhATpPxmpaaykslsd1gjWH8wNFlokF-uOh1Rl1JXCKq4Z-6EunAcM5CyWQMghrU83LGmT-cBMj51oSwpaG-WlK8Bc5IGVsUUYBq6jDEkRSpQ" alt="" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"/></div>
+      <div class="w-[28vw] h-[400px] flex-shrink-0 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD29O4J34sbEIRj7w64myerd8HVI4J1H4JpMW0z1CVJZOaIGgVsBAEIeVd_nsTpFoTMQuOiAlPcFUV17gzBMgYYMCLqC8a7ytffrz3lidx9Pf73JR7jYSId73WSOaU705msyLtPANbT6zbZI2T8FM25uOg1XS-1-pJRgAW9fjdBESEihSF9lX7WGTKVfOZcTKmYpUaCWJLuqdAsnvPrrjgix6SYLEfE9EZq_LHOFMS28pEuFKCa_t7aOBy3A7pw-lkqvEgGfeJC4vg" alt="" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"/></div>
+      <div class="w-[48vw] h-[400px] flex-shrink-0 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSGPtWb2VABH5fsLYk-oGq4sCSMJWeu7N0Op8BkYrpRP4KYaJI5jdtpcnmzjA7l1i4j31wkiDpiT1MFRk-SccrK9g0rj3SJjhW2tIJq7GYcyp_rwfWqiDkiIVAVL4HvAzPesU2a94Oq3NKvaoWxvqVHYT07tVOzQ4NS2_-70MvGiOyVVu2XOHwnhqQj9aXksKgP0hVFpTkmLjex681Y-XYnQBMwRduRqctjEhSEfDZ2sp312oDqXMApsjTp7ani9mzPTjq6i-xESQ" alt="" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"/></div>
+      <div class="w-[42vw] h-[400px] flex-shrink-0 overflow-hidden"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy9hNcR58L2z9Omc6bWcGsvrLe4xFCRYeXpoGOFxx52nnwYRjMcrbyvCD2CcMv1lY93w0qRr-BHPkHRkT0YTSN_11iE85b-ZXVKw_J7kErl-NKCmZNkseBuuWabpMY8gSlMHjWkXXlh-AyFlQLhWtVXXlK3zRYCF-EQzHElFDfd_NDo63AI2XWYlAQ2u4SBBcFpRGSHR2m0kdYgAy0bXdfKi5C6ZtlsjNHFyfnzdkHr88bS1A_VVFqbHffntr-v1pVVGzith6ftDc" alt="" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"/></div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="max-w-[1440px] mx-auto px-6 md:px-20 mt-40 mb-20">
+    <div class="mb-14 reveal"><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-3">SPECIFICATIONS</p><h3 class="font-display text-[42px] text-[#e3e2e2]">Defined by Precision</h3></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 border-t border-[#444748]/30">
+      <div class="py-12 md:border-r border-[#444748]/30 md:pr-12 reveal"><p class="text-[9px] uppercase tracking-[.3em] text-[#c4c7c7] font-body mb-5">01 / ENVELOPE</p><h4 class="font-display text-[24px] text-[#e3e2e2] mb-4">Thermal Performance</h4><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Low-E argon-filled glazing with automated kinetic shading systems to maintain optimal climate control.</p></div>
+      <div class="py-12 md:border-r border-[#444748]/30 md:px-12 reveal"><p class="text-[9px] uppercase tracking-[.3em] text-[#c4c7c7] font-body mb-5">02 / MATERIALS</p><h4 class="font-display text-[24px] text-[#e3e2e2] mb-4">Bespoke Finishes</h4><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Rare Italian quartzites and sustainably sourced timbers, hand-finished by master craftsmen over eighteen months.</p></div>
+      <div class="py-12 md:pl-12 reveal"><p class="text-[9px] uppercase tracking-[.3em] text-[#c4c7c7] font-body mb-5">03 / UTILITY</p><h4 class="font-display text-[24px] text-[#e3e2e2] mb-4">Smart Integration</h4><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Invisible home automation providing unified control over lighting, security, and acoustic environments.</p></div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="bg-[#1e2020] py-32">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-20 text-center">
+      <span class="material-symbols-outlined text-[#e3c282] text-5xl mb-8 block">format_quote</span>
+      <blockquote class="font-display text-[28px] md:text-[42px] text-[#e3e2e2] max-w-4xl mx-auto leading-tight italic">"Architecture is the learned game, correct and magnificent, of forms assembled in the light. In this project, light was our primary material."</blockquote>
+      <p class="mt-8 text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body">MAXIMILIAN NOX · FOUNDING ARCHITECT</p>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-5">
+        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
+        <p class="font-body text-[15px] text-[#454747] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+      </div>
+      <div class="grid grid-cols-3 gap-x-20 gap-y-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Berlin</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Reykjavík</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Tokyo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Vimeo</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span>
+          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#454747] font-body">© 2024 NOXCRAFT ARCHITECTURE. ALL RIGHTS RESERVED.</p>
+      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR ───────────────────────────────────────────
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(animRing);}
+animRing();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[onclick]'))document.body.classList.add('cursor-hover');else document.body.classList.remove('cursor-hover');});
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal:not(.on)').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+// ─── NAV PARALLAX ───────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav-inner');
+  if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
+  else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+});
+</script>
+</body>
+</html>

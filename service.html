@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Service | NOXCRAFT</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+    tailwind.config = {
+      darkMode:"class",
+      theme:{extend:{
+        colors:{
+          "secondary":"#e3c282",
+          "on-background":"#e3e2e2",
+          "surface":"#121414",
+          "background":"#121414"
+        },
+        fontFamily:{"display":["Playfair Display"],"body":["Montserrat"]},
+      }}
+    }
+    </script>
+    <style>
+        * { cursor: none !important; }
+        body { background: #050505; color: #e3e2e2; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+        
+        /* Premium Cursor */
+        #cursor { width: 10px; height: 10px; background: #e3c282; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); box-shadow: 0 0 15px rgba(227,194,130,.6); }
+        #cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(227,194,130,.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width .3s, height .3s, border-color .3s, background .3s; }
+        body.c-hover #cursor { opacity: 0; }
+        body.c-hover #cursor-ring { width: 60px; height: 60px; border-color: rgba(227,194,130,.8); background: rgba(227,194,130,.05); backdrop-filter: blur(2px); }
+        
+        nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 1px; background: #e3c282; transition: all .4s; transform: translateX(-50%); }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Loader */
+        #loader{position:fixed;inset:0;background:#050505;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+        #loader-line{width:200px;height:1px;background:rgba(227,194,130,.15);position:relative;overflow:hidden}
+        #loader-line::after{content:'';position:absolute;top:0;left:-100%;height:100%;width:100%;background:#e3c282;animation:loaderAnim .8s ease-in-out forwards}
+        @keyframes loaderAnim{to{left:100%}}
+        #loader-num{font-family:Montserrat;font-size:11px;letter-spacing:.3em;color:#e3c282}
+
+        /* Typography Reveal */
+        .reveal-word { display: inline-block; overflow: hidden; vertical-align: bottom; }
+        .reveal-word-inner { display: inline-block; transform: translateY(110%); }
+        
+        /* Ghost Text */
+        .ghost-text { font-size: clamp(60px, 12vw, 200px); font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px rgba(227,194,130,.06); white-space: nowrap; line-height: 1; pointer-events: none; user-select: none; }
+
+        /* --- Sticky Stacked Service Cards --- */
+        .service-card {
+            position: sticky;
+            top: 15vh;
+            margin-bottom: 25vh;
+            background: linear-gradient(145deg, #0d0e0f 0%, #050505 100%);
+            border: 1px solid rgba(227, 194, 130, 0.15);
+            border-top: 1px solid rgba(227, 194, 130, 0.4);
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.9);
+            will-change: transform, opacity;
+            transform-origin: top center;
+        }
+
+        /* Citations style */
+        .citation { font-size: 8px; color: rgba(227,194,130,0.4); vertical-align: super; letter-spacing: 0; font-family: Montserrat; pointer-events: none; }
+
+        @media(max-width:768px){.mob-hide{display:none}}
+    </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<div id="loader">
+  <div style="font-family:'Playfair Display';font-size:28px;letter-spacing:-.02em;color:#e3e2e2">NOXCRAFT</div>
+  <div id="loader-line"></div>
+  <div id="loader-num">0%</div>
+</div>
+
+<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60">
+<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
+  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]" style="opacity:0" id="nav-logo">NOXCRAFT</a>
+  
+  <div class="mob-hide flex items-center gap-10" id="nav-links" style="opacity:0">
+    <a href="project.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Project</a>
+    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Studio</a>
+    <a href="service.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#e3c282] hover:text-white transition-colors">Service</a>
+    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Contact</a>
+  </div>
+
+  <div class="w-[100px] hidden md:block"></div> 
+</nav>
+</header>
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden border-b border-[#e3c282]/10 pt-20">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(227,194,130,0.15)_0%,rgba(5,5,5,1)_60%)] z-0"></div>
+  
+  <div class="relative z-20 text-center max-w-5xl px-6 flex flex-col items-center gap-7" id="hero-content">
+    <p id="hero-tag" class="text-[10px] font-semibold uppercase tracking-[.4em] text-[#e3c282] font-body" style="opacity:0;transform:translateY(12px)">THE STUDIO</p>
+    
+    <h1 id="hero-h1" class="font-display text-[52px] md:text-[90px] leading-[1.05] tracking-tight text-[#e3e2e2]">
+      <div class="overflow-hidden pb-2"><span class="reveal-word"><span class="reveal-word-inner">Transforming</span></span></div>
+      <div class="overflow-hidden"><span class="reveal-word"><span class="reveal-word-inner" style="font-style:italic;color:#e3c282;font-weight:300;">Thoughts</span></span> <span class="reveal-word"><span class="reveal-word-inner">Into Reality<sup class="citation">[cite: 3]</sup></span></span></div>
+    </h1>
+    
+    <div id="hero-sub" class="mt-4 max-w-2xl" style="opacity:0;transform:translateY(20px)">
+        <p class="font-body text-[16px] font-light text-[#b5b7b7] leading-relaxed mb-4">Noxcraft Studio is not just a firm-it's a journey.<sup class="citation">[cite: 3]</sup> We craft your thoughts into designs that carry depth and meaning-just like the midnight sky, which inspires our name, Nox.<sup class="citation">[cite: 6]</sup></p>
+    </div>
+
+    <div id="scroll-ind" class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" style="opacity:0">
+        <div style="width:1px;height:60px;background:rgba(227,194,130,.2);position:relative;overflow:hidden">
+          <div id="scroll-line" style="position:absolute;top:-100%;left:0;width:100%;height:100%;background:#e3c282"></div>
+        </div>
+        <span class="text-[9px] font-semibold uppercase tracking-[.3em] text-[#e3c282]/50 font-body">DISCOVER</span>
+    </div>
+  </div>
+</section>
+
+<section class="relative w-full bg-[#050505] py-40 px-6 md:px-20 overflow-hidden" id="about-section">
+    <div class="ghost-text absolute top-10 left-[-2%] z-0">COEXISTENCE</div>
+    <div class="max-w-[1200px] mx-auto relative z-10 text-center">
+        <p class="font-body text-[10px] uppercase tracking-[.4em] text-[#e3c282] mb-12">ABOUT OUR ARCHITECTURE<sup class="citation">[cite: 9]</sup></p>
+        
+        <h2 class="font-display text-4xl md:text-6xl lg:text-[72px] leading-tight text-highlight-container" style="line-height: 1.2;">
+            <span class="hl-word inline-block">We</span>
+            <span class="hl-word inline-block">believe</span>
+            <span class="hl-word inline-block">architecture</span>
+            <span class="hl-word inline-block">must</span>
+            <span class="hl-word inline-block italic pr-1">breathe,</span>
+            <span class="hl-word inline-block italic pr-1">evolve,</span>
+            <span class="hl-word inline-block">and</span>
+            <span class="hl-word inline-block">seamlessly</span>
+            <span class="hl-word inline-block">become</span>
+            <span class="hl-word inline-block">a</span>
+            <span class="hl-word inline-block">part</span>
+            <span class="hl-word inline-block">of</span>
+            <span class="hl-word inline-block">the</span>
+            <span class="hl-word inline-block">larger</span>
+            <span class="hl-word inline-block">ecosystem</span>
+            <span class="hl-word inline-block">of</span>
+            <span class="hl-word inline-block">life.<sup class="citation">[cite: 4]</sup></span>
+        </h2>
+
+        <div class="mt-16 max-w-3xl mx-auto border-l border-[#e3c282]/30 pl-8 text-left text-reveal-p" style="opacity: 0; transform: translateX(-20px);">
+            <p class="font-body text-[16px] text-[#b5b7b7] leading-relaxed font-light mb-4">At Noxcraft Studio, we approach architecture as a dialogue between ideas, people, and nature.<sup class="citation">[cite: 10]</sup></p>
+            <p class="font-body text-[16px] text-[#b5b7b7] leading-relaxed font-light">Every design is an opportunity to explore possibilities and create a deeper connection between you and your environment<sup class="citation">[cite: 12]</sup>—making spaces functional yet meaningful, innovative yet timeless.<sup class="citation">[cite: 11]</sup></p>
+        </div>
+    </div>
+</section>
+
+<section id="services-stacked" class="relative bg-[#050505] border-y border-[#e3c282]/10 py-32 px-6 md:px-20 overflow-visible">
+    <div class="max-w-[1440px] mx-auto text-center mb-24 relative z-10">
+        <p class="font-body text-[10px] uppercase tracking-[.4em] text-[#e3c282] mb-4">OUR SERVICES<sup class="citation">[cite: 64]</sup></p>
+        <h2 class="font-display text-[#e3e2e2] leading-tight text-4xl md:text-6xl mb-6">End-to-End <span style="font-style:italic;color:#e3c282; font-weight:300;">Expertise<sup class="citation">[cite: 67]</sup></span></h2>
+        <p class="font-body text-[14px] text-[#b5b7b7] leading-relaxed font-light max-w-2xl mx-auto">We offer a comprehensive, one-stop solution for all your interior design needs, from concept development to project execution.<sup class="citation">[cite: 65]</sup> With a focus on quality and client satisfaction, we handle every detail.<sup class="citation">[cite: 66]</sup></p>
+    </div>
+
+    <div class="max-w-[1100px] mx-auto relative pb-[10vh]">
+        
+        <div class="service-card p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div class="md:w-1/2">
+                <span class="material-symbols-outlined text-[3rem] text-[#e3c282] mb-6">floor_plan</span>
+                <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] mb-4">Space Planning & Design Consultation<sup class="citation">[cite: 68]</sup></h3>
+                <p class="font-body text-[14px] text-[#b5b7b7] font-light leading-relaxed">Defining the initial vision, optimizing spatial flow, and establishing the aesthetic framework tailored specifically to your core requirements.</p>
+            </div>
+            <div class="font-display text-[120px] md:text-[180px] text-[#e3c282]/10 leading-none select-none pointer-events-none">
+                01
+            </div>
+        </div>
+
+        <div class="service-card p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div class="md:w-1/2">
+                <span class="material-symbols-outlined text-[3rem] text-[#e3c282] mb-6">architecture</span>
+                <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] mb-4">Design and Build<sup class="citation">[cite: 69]</sup></h3>
+                <p class="font-body text-[14px] text-[#b5b7b7] font-light leading-relaxed">Transitioning pure concepts into tangible living architecture through precise structural planning, refined detailing, and uncompromising execution.</p>
+            </div>
+            <div class="font-display text-[120px] md:text-[180px] text-[#e3c282]/10 leading-none select-none pointer-events-none">
+                02
+            </div>
+        </div>
+
+        <div class="service-card p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div class="md:w-1/2">
+                <span class="material-symbols-outlined text-[3rem] text-[#e3c282] mb-6">inventory_2</span>
+                <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] mb-4">Source and Procurement<sup class="citation">[cite: 72]</sup></h3>
+                <p class="font-body text-[14px] text-[#b5b7b7] font-light leading-relaxed">Identifying and securing premium global materials, ensuring every element aligns with the project's high standards of durability and luxury.</p>
+            </div>
+            <div class="font-display text-[120px] md:text-[180px] text-[#e3c282]/10 leading-none select-none pointer-events-none">
+                03
+            </div>
+        </div>
+
+        <div class="service-card p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 mb-0">
+            <div class="md:w-1/2">
+                <span class="material-symbols-outlined text-[3rem] text-[#e3c282] mb-6">handshake</span>
+                <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] mb-4">General Contracting<sup class="citation">[cite: 73]</sup></h3>
+                <p class="font-body text-[14px] text-[#b5b7b7] font-light leading-relaxed">Assuming complete stewardship of the construction site, orchestrating labor, timelines, and budgets to guarantee an immaculate final handover.</p>
+            </div>
+            <div class="font-display text-[120px] md:text-[180px] text-[#e3c282]/10 leading-none select-none pointer-events-none">
+                04
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="relative w-full bg-[#050505] py-40 overflow-hidden" id="expertise-section">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-20">
+        
+        <div class="mb-20 flex flex-col items-start border-b border-[#e3c282]/15 pb-8">
+            <p class="font-body text-[10px] uppercase tracking-[.4em] text-[#e3c282] mb-4">PORTFOLIO SCOPE</p>
+            <h2 class="font-display text-[#e3e2e2] leading-tight text-5xl md:text-7xl">We Expertise <span style="font-style:italic;color:#e3c282; font-weight:300;">In<sup class="citation">[cite: 49]</sup></span></h2>
+        </div>
+
+        <div class="flex flex-col w-full">
+            
+            <div class="group flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-[#e3c282]/15 hover:border-[#e3c282] transition-colors duration-500">
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="font-display text-[#e3c282] text-2xl opacity-50 group-hover:opacity-100 transition-opacity">01</span>
+                    <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] group-hover:text-[#e3c282] transition-colors duration-500">Office Spaces<sup class="citation">[cite: 50]</sup></h3>
+                </div>
+                <div class="font-body text-[13px] text-[#b5b7b7] tracking-widest uppercase mt-6 md:mt-0 md:w-1/2 md:text-right leading-loose">
+                    Independent Offices<sup class="citation">[cite: 50]</sup> • Co-working Spaces<sup class="citation">[cite: 50]</sup> • Corporate Spaces<sup class="citation">[cite: 50]</sup>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-[#e3c282]/15 hover:border-[#e3c282] transition-colors duration-500">
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="font-display text-[#e3c282] text-2xl opacity-50 group-hover:opacity-100 transition-opacity">02</span>
+                    <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] group-hover:text-[#e3c282] transition-colors duration-500">Hospitality<sup class="citation">[cite: 51]</sup></h3>
+                </div>
+                <div class="font-body text-[13px] text-[#b5b7b7] tracking-widest uppercase mt-6 md:mt-0 md:w-1/2 md:text-right leading-loose">
+                    Hotels & Resorts<sup class="citation">[cite: 52]</sup> • Restaurant & Cafes<sup class="citation">[cite: 52]</sup> • Bars and Brewery<sup class="citation">[cite: 52]</sup> • Airports & Lounges<sup class="citation">[cite: 52]</sup>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-[#e3c282]/15 hover:border-[#e3c282] transition-colors duration-500">
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="font-display text-[#e3c282] text-2xl opacity-50 group-hover:opacity-100 transition-opacity">03</span>
+                    <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] group-hover:text-[#e3c282] transition-colors duration-500">Retail Spaces<sup class="citation">[cite: 53]</sup></h3>
+                </div>
+                <div class="font-body text-[13px] text-[#b5b7b7] tracking-widest uppercase mt-6 md:mt-0 md:w-1/2 md:text-right leading-loose">
+                    Apparel and Fashion Stores<sup class="citation">[cite: 53]</sup> • Jewellery Showrooms<sup class="citation">[cite: 54]</sup> • Luxury Retail & Flagship Stores<sup class="citation">[cite: 54]</sup>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-[#e3c282]/15 hover:border-[#e3c282] transition-colors duration-500">
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="font-display text-[#e3c282] text-2xl opacity-50 group-hover:opacity-100 transition-opacity">04</span>
+                    <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] group-hover:text-[#e3c282] transition-colors duration-500">Institutional<sup class="citation">[cite: 55]</sup></h3>
+                </div>
+                <div class="font-body text-[13px] text-[#b5b7b7] tracking-widest uppercase mt-6 md:mt-0 md:w-1/2 md:text-right leading-loose">
+                    Educational Institutes<sup class="citation">[cite: 56]</sup> • Sports & Recreational Centers<sup class="citation">[cite: 56]</sup> • Healthcare Facilities<sup class="citation">[cite: 57]</sup>
+                </div>
+            </div>
+
+            <div class="group flex flex-col md:flex-row items-baseline justify-between py-12 border-b border-[#e3c282]/15 hover:border-[#e3c282] transition-colors duration-500">
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="font-display text-[#e3c282] text-2xl opacity-50 group-hover:opacity-100 transition-opacity">05</span>
+                    <h3 class="font-display text-4xl md:text-5xl text-[#e3e2e2] group-hover:text-[#e3c282] transition-colors duration-500">Residential<sup class="citation">[cite: 58]</sup></h3>
+                </div>
+                <div class="font-body text-[13px] text-[#b5b7b7] tracking-widest uppercase mt-6 md:mt-0 md:w-1/2 md:text-right leading-loose">
+                    Luxury Residences<sup class="citation">[cite: 59]</sup> • Club house<sup class="citation">[cite: 59]</sup> • Vacation Homes & Rentals<sup class="citation">[cite: 59]</sup> • Eco Friendly Sustainable Homes<sup class="citation">[cite: 60]</sup>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20 relative z-20">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-5">
+        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
+        <p class="font-body text-[15px] text-[#b5b7b7] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+        <p class="font-body text-[11px] text-[#e3c282] uppercase tracking-[.2em] pt-4">PROJECTS@NOXCRAFTSTUDIO.COM<sup class="citation">[cite: 241]</sup><br>+91 9669957712<sup class="citation">[cite: 241]</sup></p>
+      </div>
+      <div class="grid grid-cols-3 gap-x-16 gap-y-8">
+        <div class="flex flex-col gap-3"><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Chandigarh<sup class="citation">[cite: 77]</sup></span><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Delhi<sup class="citation">[cite: 77]</sup></span><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Indore<sup class="citation">[cite: 77]</sup></span></div>
+        <div class="flex flex-col gap-3"><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Facebook</span></div>
+        <div class="flex flex-col gap-3"><p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span><span class="font-body text-[14px] text-[#b5b7b7] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span></div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#b5b7b7] font-body">© 2026 NOXCRAFT STUDIO LLP. ALL RIGHTS RESERVED.<sup class="citation">[cite: 242]</sup></p>
+      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* Cursor Engine */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.to(cur,{x:mx,y:my,duration:0,overwrite:true,transform:'translate(-50%,-50%)'});});
+(function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+
+/* Loader */
+const loader=document.getElementById('loader'),loaderNum=document.getElementById('loader-num');
+let prog=0;
+const progInterval=setInterval(()=>{prog+=Math.random()*15;if(prog>=100){prog=100;clearInterval(progInterval);}if(loaderNum)loaderNum.textContent=Math.floor(prog)+'%';},80);
+window.addEventListener('load',()=>{
+  clearInterval(progInterval);if(loaderNum)loaderNum.textContent='100%';
+  setTimeout(()=>{if(loader)gsap.to(loader,{yPercent:-100,duration:1,ease:'power3.inOut',onComplete:()=>loader.remove()});heroEntrance();},300);
+});
+
+/* Hero Entrance */
+function heroEntrance(){
+  const tl=gsap.timeline();
+  tl.to('#nav-logo',{opacity:1,duration:.6,ease:'power2.out'})
+    .to('#nav-links',{opacity:1,duration:.6,ease:'power2.out'},'-=.3')
+    .to('#hero-tag',{opacity:1,y:0,duration:.8,ease:'power3.out'},'-=.2')
+    .to('.reveal-word-inner',{y:0,duration:1.2,stagger:.1,ease:'power4.out'},'<.2')
+    .to('#hero-sub',{opacity:1,y:0,duration:1,ease:'power3.out'},'-=.5')
+    .to('#scroll-ind',{opacity:1,duration:1,ease:'power2.out'},'-=.3');
+    
+  gsap.to('#scroll-line',{y:'200%',duration:1.4,repeat:-1,ease:'power2.inOut',delay:1.5});
+}
+
+/* Nav Scroll Logic */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav-inner');
+  if(nav){
+      if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
+      else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+  }
+});
+
+/* --- Scanning Text Highlight (Gold to White) --- */
+const hlWords = gsap.utils.toArray('.hl-word');
+
+// Initialize words to be slightly dimmed
+gsap.set(hlWords, { color: 'rgba(227, 226, 226, 0.2)' });
+
+const tlHighlight = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#about-section",
+        start: "top 60%", 
+        end: "bottom 50%", 
+        scrub: 0.5 
+    }
+});
+
+hlWords.forEach((word, i) => {
+    // Step 1: Word turns Gold
+    tlHighlight.to(word, {
+        color: '#e3c282',
+        duration: 0.3,
+        ease: "power2.out"
+    }, i * 0.15)
+    // Step 2: Word goes back to solid White after Gold passes
+    .to(word, {
+        color: '#e3e2e2',
+        duration: 0.3,
+        ease: "power2.in"
+    }, (i * 0.15) + 0.3);
+});
+
+// Reveal paragraph after the scanning text starts
+gsap.to('.text-reveal-p', {
+    opacity: 1,
+    x: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+        trigger: "#about-section",
+        start: "top 40%"
+    }
+});
+
+/* Parallax Stacking Logic for Services */
+const cards = gsap.utils.toArray('.service-card');
+
+cards.forEach((card, index) => {
+    if(index === cards.length - 1) return;
+    
+    gsap.to(card, {
+        scale: 0.9,
+        opacity: 0.3,
+        scrollTrigger: {
+            trigger: cards[index + 1],
+            start: "top 80%", 
+            end: "top 20%",   
+            scrub: true       
+        }
+    });
+});
+
+/* Footer Reveal */
+gsap.from('footer > div > *',{y:30,opacity:0,duration:.8,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'footer',start:'top 90%',once:true}});
+
+</script>
+</body>
+</html>

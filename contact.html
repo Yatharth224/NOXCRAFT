@@ -4,181 +4,284 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>NOXCRAFT | Contact</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <script>
 tailwind.config = {
   darkMode: "class",
   theme: {
     extend: {
       colors: {
-        "secondary": "#e3c282","surface-container-lowest": "#0d0e0f","on-background": "#e3e2e2",
-        "on-secondary": "#402d00","on-surface": "#e3e2e2","on-surface-variant": "#c4c7c7",
-        "surface": "#121414","surface-container": "#1e2020","surface-container-high": "#292a2a",
-        "surface-container-low": "#1a1c1c","outline-variant": "#444748","background": "#121414",
-        "on-tertiary-fixed-variant": "#454747"
+        gold: { DEFAULT: "#e3c282", hover: "#d4b374", dim: "rgba(227, 194, 130, 0.2)" },
+        dark: { DEFAULT: "#000000", elevate: "#0a0a0a" },
+        ink: { main: "#ffffff", muted: "#888888", border: "#1a1a1a" }
       },
-      fontFamily: {"display": ["Playfair Display"],"body": ["Montserrat"]},
-      spacing: {"margin-desktop": "80px","margin-mobile": "24px","container-max": "1440px","section-gap": "160px"}
+      fontFamily: {
+        display: ["Playfair Display", "serif"],
+        body: ["Montserrat", "sans-serif"]
+      }
     }
   }
 }
 </script>
 <style>
-  *{cursor:none!important}
-  body{background:#0a0a0a;color:#e3e2e2;overflow-x:hidden}
-  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;display:inline-block;vertical-align:middle}
-  #cursor{width:12px;height:12px;background:#e3c282;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;box-shadow:0 0 12px rgba(227,194,130,.4)}
-  #cursor-ring{width:36px;height:36px;border:1px solid rgba(227,194,130,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.23,1,.32,1)}
-  .cursor-hover #cursor{transform:translate(-50%,-50%) scale(0);opacity:0}
-  .cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(227,194,130,.8);background:rgba(227,194,130,.05)}
-  
-  .gold-line::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:1px;background:#e3c282;transition:all .4s;transform:translateX(-50%)}
-  .gold-line:hover::after{width:100%}
-  
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-  .reveal.on{opacity:1;transform:translateY(0)}
-  
-  .form-input-gold{background:transparent;border:none;border-bottom:1px solid rgba(227,194,130,.2);border-radius:0;padding:.75rem 0;width:100%;transition:all .4s;color:#e3e2e2;font-family:Montserrat}
-  .form-input-gold:focus{outline:none;border-bottom-color:#e3c282}
-  .input-grp{position:relative}
-  .input-grp label{position:absolute;left:0;top:.75rem;font-size:11px;letter-spacing:.2em;font-weight:600;color:rgba(196,199,199,.4);pointer-events:none;transition:all .4s;font-family:Montserrat;text-transform:uppercase}
-  .input-grp:focus-within label,.input-grp input:not(:placeholder-shown)~label,.input-grp textarea:not(:placeholder-shown)~label{top:-18px;font-size:9px;color:#e3c282;letter-spacing:.3em}
-  
-  nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-  .nav-active{color:#e3c282 !important}
-  .nav-active::after{content:'';position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#e3c282;border-radius:50%}
-  
-  @media(max-width:768px){.mob-hide{display:none}}
-  .grayscale-hover{filter:grayscale(1);transition:filter 1s}
-  .grayscale-hover:hover{filter:grayscale(0)}
+  ::selection { background: #e3c282; color: #000000; }
+  body { background-color: #000000; color: #ffffff; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+
+  /* Film Grain for subtle texture over pure black */
+  .noise { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* Custom Cursor */
+  @media (pointer: fine) {
+    * { cursor: none !important; }
+    #dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #e3c282; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: opacity 0.2s; }
+    #ring { position: fixed; top: 0; left: 0; width: 44px; height: 44px; border: 1px solid rgba(227,194,130,0.3); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-color 0.3s; }
+    .cursor-active #dot { opacity: 0; }
+    .cursor-active #ring { width: 64px; height: 64px; border-color: #e3c282; background: rgba(227,194,130,0.05); }
+  }
+
+  /* Reveal Animation */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* Minimalist Form Architecture */
+  .form-group { position: relative; margin-bottom: 3rem; }
+  .form-input { 
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid #1a1a1a; 
+    padding: 1rem 0; color: #ffffff; font-family: 'Playfair Display', serif; 
+    font-size: 1.25rem; transition: border-color 0.4s ease; border-radius: 0;
+  }
+  .form-input:focus { outline: none; border-bottom-color: #e3c282; }
+  .form-label { 
+    position: absolute; left: 0; top: 1.2rem; color: #888888; font-family: 'Montserrat', sans-serif; 
+    font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; 
+    pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+  }
+  .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label { 
+    top: -1rem; font-size: 0.6rem; color: #e3c282; letter-spacing: 0.2em; 
+  }
+
+  /* Solid Hover Button */
+  .btn-solid {
+    position: relative; display: inline-flex; justify-content: center; align-items: center; gap: 1rem;
+    padding: 1.25rem 3.5rem; background: #0a0a0a; border: 1px solid #1a1a1a; color: #ffffff;
+    font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.2em; transition: all 0.4s ease; overflow: hidden; z-index: 1;
+  }
+  .btn-solid::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+    background: #e3c282; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: -1;
+  }
+  .btn-solid:hover { border-color: #e3c282; color: #000000; font-weight: 600; }
+  .btn-solid:hover::before { width: 100%; }
 </style>
 </head>
-<body>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<body class="relative">
 
-<!-- NAV -->
-<header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
-<nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
-  <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
-  <div class="mob-hide flex items-center gap-10">
-    <a href="projects.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Projects</a>
-    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Studio</a>
-    <a href="contact.html" class="nav-link nav-active text-[11px] font-medium uppercase tracking-widest text-[#e3c282] transition-colors relative gold-line">Contact</a>
-  </div>
-  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
-</nav>
+<div class="noise"></div>
+<div id="dot"></div>
+<div id="ring"></div>
+
+<header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-ink-border px-6 md:px-16 py-6 transition-all">
+  <nav class="max-w-screen-2xl mx-auto flex justify-between items-center">
+    <a href="/" class="font-display text-2xl tracking-widest text-ink-main hover:opacity-70 transition-opacity">NOXCRAFT</a>
+    <div class="hidden md:flex gap-12">
+      <a href="projects.html" class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink-main transition-colors">Works</a>
+      <a href="studio.html" class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink-main transition-colors">Studio</a>
+      <a href="service.html" class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink-main transition-colors">Service</a>
+      <a href="contact.html" class="text-[10px] font-medium uppercase tracking-[0.2em] text-gold border-b border-gold/40 pb-1">Contact</a>
+    </div>
+  </nav>
 </header>
 
-<!-- ═══ CONTACT PAGE ═══ -->
-<div class="pt-36 pb-40 relative min-h-screen">
-  <div class="fixed top-0 right-0 w-1/3 h-screen -z-10 opacity-15 pointer-events-none overflow-hidden">
-    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWKuuJnBYmj4kHkkx87HeDdR8CTYZ0-CX6qbcFkhiXuvWV9wuTnxDARL1RgcBSQjddTHkHWkqqcHXBaavPKNEoi6BNHO4uvdXSY24iN6gFvEdSr5Gj9LqQLD0aNEn2OqNnB9iR4Su_xycooNCYUhW7L1DDtEwyQ_PUUqFz7AekgoA28kfg-VASHL-wbvplrucbRGgi8Ph-RmvRmEybHyjAAOEPovIBzFRj97A0kRT7urgdMRkzYN4JMk38Ta4HwXhomGnIU8ZEf6o" alt="" class="w-full h-full object-cover grayscale brightness-50 contrast-125"/>
-    <div class="absolute inset-0 bg-gradient-to-l from-[#e3c282]/10 to-transparent"></div>
-  </div>
-
-  <div class="max-w-[1440px] mx-auto px-6 md:px-20">
-    <header class="text-center mb-32 max-w-4xl mx-auto reveal">
-      <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-7">START A CONVERSATION</p>
-      <h1 class="font-display text-[48px] md:text-[84px] tracking-tight mb-7 leading-tight">Let's shape the <br class="hidden md:block"/> <span class="italic font-normal">unseen future</span> together.</h1>
-      <p class="font-body text-[18px] font-light text-[#c4c7c7]/80">We partner with visionary clients to create iconic spaces. Tell us about your project, your ambition, and your timeline.</p>
-    </header>
-
-    <div class="max-w-3xl mx-auto reveal">
-      <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
-        <div class="input-grp"><input class="form-input-gold" id="name" type="text" placeholder=" " required/><label for="name">Full Name</label></div>
-        <div class="input-grp"><input class="form-input-gold" id="email" type="email" placeholder=" " required/><label for="email">Email Address</label></div>
-        <div class="input-grp"><input class="form-input-gold" id="phone" type="tel" placeholder=" "/><label for="phone">Phone Number</label></div>
-        <div class="input-grp"><input class="form-input-gold" id="instagram" type="text" placeholder=" "/><label for="instagram">Instagram @</label></div>
-        <div class="input-grp md:col-span-2 mt-4"><textarea class="form-input-gold resize-none" id="message" rows="4" placeholder=" " required></textarea><label for="message">Project Brief / Message</label></div>
-        <div class="md:col-span-2 pt-10 text-center">
-          <button type="submit" id="submitBtn" class="relative inline-flex items-center justify-center py-5 px-16 border border-[#e3c282]/50 hover:border-[#e3c282] overflow-hidden group transition-all duration-500">
-            <span class="absolute inset-0 bg-[#e3c282] -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-            <span id="btnText" class="relative z-10 text-[11px] font-medium uppercase tracking-[.3em] text-[#e3e2e2] group-hover:text-[#402d00] transition-colors duration-300 font-body">Send Inquiry</span>
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Offices -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-32 pt-20 border-t border-[#e3c282]/10 reveal">
-      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">LONDON STUDIO</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">The Brutalist Exchange, 4th Floor<br/>Southbank, London SE1<br/>United Kingdom</p></div>
-      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">TOKYO OUTPOST</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">Minami-Aoyama Glass House<br/>Minato-ku, Tokyo 107-0062<br/>Japan</p></div>
-      <div><h3 class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#e3c282] font-body mb-5">CONTACT DIRECT</h3><p class="font-body text-[15px] text-[#c4c7c7] leading-relaxed">general@noxcraft.arch<br/>+44 (0) 20 7946 0123</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER (shared) -->
-<footer class="w-full bg-[#0d0e0f] border-t border-[#e3c282]/20">
-  <div class="max-w-[1440px] mx-auto px-6 md:px-20 py-20 flex flex-col gap-12">
-    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
-      <div class="space-y-5">
-        <h2 class="font-display text-[52px] tracking-tighter text-[#e3e2e2]">NOXCRAFT</h2>
-        <p class="font-body text-[15px] text-[#454747] max-w-xs">Designing the future by respecting the permanence of the past.</p>
+<main class="relative z-10 pt-44 pb-0 min-h-screen flex flex-col">
+  <div class="max-w-screen-2xl mx-auto px-6 md:px-16 w-full flex-grow flex flex-col">
+    
+    <section class="mb-20 reveal">
+      <div class="flex items-center gap-6 mb-8">
+        <span class="w-12 h-[1px] bg-gold"></span>
+        <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-medium">Initiate Dialogue</span>
       </div>
-      <div class="grid grid-cols-3 gap-x-20 gap-y-10">
-        <div class="flex flex-col gap-4">
-          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LOCATIONS</p>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Berlin</span>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Reykjavík</span>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Tokyo</span>
-        </div>
-        <div class="flex flex-col gap-4">
-          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">SOCIAL</p>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Instagram</span>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">LinkedIn</span>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Vimeo</span>
-        </div>
-        <div class="flex flex-col gap-4">
-          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-[#c4c7c7] font-body">LEGAL</p>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Terms</span>
-          <span class="font-body text-[15px] text-[#454747] hover:text-[#e3c282] transition-colors cursor-pointer">Privacy</span>
-        </div>
+      <h1 class="font-display text-[48px] md:text-[96px] leading-[1.05] tracking-tight text-ink-main max-w-4xl">
+        Let's detail the space <br class="hidden md:block" />
+        <span class="italic font-light text-gold">you envision.</span>
+      </h1>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-12 flex-grow border-t border-ink-border">
+      
+      <div class="lg:col-span-7 py-16 lg:pr-20 reveal" style="transition-delay: 0.1s;">
+        <p class="font-body text-[14px] font-light text-ink-muted leading-relaxed mb-16 max-w-lg">
+          We approach every enquiry with absolute precision. Detail your ambition below, and our partners will review your project scope within 48 hours.
+        </p>
+
+        <form id="contactForm" class="w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+            <div class="form-group">
+              <input type="text" id="name" class="form-input" placeholder=" " required />
+              <label for="name" class="form-label">Client Name</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" class="form-input" placeholder=" " required />
+              <label for="email" class="form-label">Email Address</label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+            <div class="form-group">
+              <input type="tel" id="phone" class="form-input" placeholder=" " />
+              <label for="phone" class="form-label">Phone Number</label>
+            </div>
+            <div class="form-group">
+              <input type="text" id="location" class="form-input" placeholder=" " required />
+              <label for="location" class="form-label">Project Location</label>
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <textarea id="message" rows="4" class="form-input resize-none" placeholder=" " required></textarea>
+            <label for="message" class="form-label">Project Brief & Scope</label>
+          </div>
+
+          <div class="mt-12">
+            <button type="submit" id="submitBtn" class="btn-solid w-full md:w-auto group">
+              <span id="btnText">Transmit Enquiry</span>
+              <svg id="btnIcon" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.5" d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
       </div>
+
+      <div class="lg:col-span-5 py-16 lg:pl-20 lg:border-l border-ink-border reveal" style="transition-delay: 0.2s;">
+        
+        <div class="mb-20">
+          <h2 class="text-[9px] font-semibold uppercase tracking-[0.2em] text-ink-muted mb-8">Direct Studio Line</h2>
+          <div class="space-y-6">
+            <a href="mailto:info@noxcraft.studio" class="block font-display text-2xl md:text-3xl text-ink-main hover:text-gold transition-colors">info@noxcraft.studio</a>
+            <a href="tel:+442079460123" class="block font-display text-2xl md:text-3xl text-ink-main hover:text-gold transition-colors">+44 (0) 20 7946 0123</a>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-[9px] font-semibold uppercase tracking-[0.2em] text-ink-muted mb-8">Our Studios</h2>
+          
+          <div class="space-y-12">
+            <div class="group">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="text-[10px] text-ink-muted">01</span>
+                <h3 class="font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Dubai Studio</h3>
+              </div>
+              <p class="font-body text-[13px] font-light text-ink-muted leading-loose pl-7 border-l border-ink-border group-hover:border-gold transition-colors">
+                Levels 41 & 42, Emirates Towers<br/>
+                Sheikh Zayed Rd, Dubai, UAE
+              </p>
+            </div>
+
+            <div class="group">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="text-[10px] text-ink-muted">02</span>
+                <h3 class="font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">New Delhi</h3>
+              </div>
+              <p class="font-body text-[13px] font-light text-ink-muted leading-loose pl-7 border-l border-ink-border group-hover:border-gold transition-colors">
+                F-2/3, Ground Floor, Vasant Vihar<br/>
+                New Delhi 110057, India
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<footer class="bg-black border-t border-ink-border relative z-10">
+  <div class="max-w-screen-2xl mx-auto px-6 md:px-16 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex flex-col text-center md:text-left">
+      <span class="font-display text-xl tracking-widest text-ink-main mb-1">NOXCRAFT</span>
+      <span class="font-body text-[9px] uppercase tracking-[0.2em] text-ink-muted">Architecture & Interiors</span>
     </div>
-    <div class="pt-8 border-t border-[#444748]/20 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-[10px] font-semibold uppercase tracking-[.3em] text-[#454747] font-body">© 2024 NOXCRAFT ARCHITECTURE. ALL RIGHTS RESERVED.</p>
-      <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#e3c282] animate-pulse"></span><span class="text-[10px] font-semibold uppercase tracking-widest text-[#e3c282] font-body">SYSTEMS OPERATIONAL</span></div>
+    <div class="flex gap-10">
+      <a href="#" class="font-body text-[10px] uppercase tracking-[0.2em] text-ink-muted hover:text-gold transition-colors">Instagram</a>
+      <a href="#" class="font-body text-[10px] uppercase tracking-[0.2em] text-ink-muted hover:text-gold transition-colors">LinkedIn</a>
+      <a href="#" class="font-body text-[10px] uppercase tracking-[0.2em] text-ink-muted hover:text-gold transition-colors">Journal</a>
+    </div>
+    <div class="font-body text-[9px] uppercase tracking-[0.2em] text-ink-muted">
+      &copy; 2026. All Rights Reserved.
     </div>
   </div>
 </footer>
 
 <script>
-// ─── CURSOR ───────────────────────────────────────────
-const cursor=document.getElementById('cursor');
-const ring=document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
-function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(animRing);}
-animRing();
-document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[onclick]'))document.body.classList.add('cursor-hover');else document.body.classList.remove('cursor-hover');});
+/** Custom Mouse Cursor Engine */
+if (window.matchMedia("(pointer: fine)").matches) {
+  const dot = document.getElementById('dot');
+  const ring = document.getElementById('ring');
+  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+  let ringX = mouseX, ringY = mouseY;
 
-// ─── SCROLL REVEAL ────────────────────────────────────
-function initReveal(){
-  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal:not(.on)').forEach(el=>obs.observe(el));
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  });
+
+  const render = () => {
+    ringX += (mouseX - ringX) * 0.15; 
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(render);
+  };
+  requestAnimationFrame(render);
+
+  const interactables = document.querySelectorAll('a, button, input, textarea');
+  interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+  });
 }
-initReveal();
 
-// ─── CONTACT FORM ─────────────────────────────────────
-document.getElementById('contactForm')?.addEventListener('submit',function(e){
+/** Observer for Reveals */
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      obs.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/** Elegant Form Submission */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const btn=document.getElementById('submitBtn');
-  const txt=document.getElementById('btnText');
-  txt.textContent='TRANSMITTING...';btn.disabled=true;btn.style.opacity='.6';
-  setTimeout(()=>{txt.textContent='INQUIRY RECEIVED ✓';btn.style.opacity='1';
-    setTimeout(()=>{this.reset();txt.textContent='Send Inquiry';btn.disabled=false;},2500);
-  },1500);
-});
-
-// ─── NAV PARALLAX ───────────────────────────────────
-window.addEventListener('scroll',()=>{
-  const nav=document.getElementById('nav-inner');
-  if(window.scrollY>80){nav.classList.remove('py-7');nav.classList.add('py-4');}
-  else{nav.classList.add('py-7');nav.classList.remove('py-4');}
+  
+  const btn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const btnIcon = document.getElementById('btnIcon');
+  
+  btn.style.pointerEvents = 'none';
+  btnText.textContent = 'Transmitting...';
+  btnIcon.style.opacity = '0';
+  
+  setTimeout(() => {
+    btnText.textContent = 'Enquiry Received ✓';
+    btn.style.borderColor = '#e3c282'; 
+    btn.style.color = '#e3c282';
+    
+    setTimeout(() => {
+      this.reset();
+      document.activeElement.blur(); 
+      btn.style.pointerEvents = 'auto';
+      btnText.textContent = 'Transmit Enquiry';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+      btnIcon.style.opacity = '1';
+    }, 3000);
+  }, 1500);
 });
 </script>
 </body>

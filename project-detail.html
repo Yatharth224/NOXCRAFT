@@ -61,12 +61,14 @@ tailwind.config = {
 <header id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60" style="backdrop-filter:blur(20px)">
 <nav class="max-w-[1440px] mx-auto flex justify-between items-center px-6 md:px-20 py-7 transition-all duration-500" id="nav-inner">
   <a href="index.html" class="font-display text-2xl font-semibold tracking-tighter text-[#e3e2e2]">NOXCRAFT</a>
-  <div class="mob-hide flex items-center gap-10">
-    <a href="projects.html" class="nav-link nav-active text-[11px] font-medium uppercase tracking-widest text-[#e3c282] transition-colors relative gold-line">Projects</a>
-    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Studio</a>
-    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors relative gold-line">Contact</a>
+ <div class="mob-hide flex items-center gap-10" id="nav-links" style="opacity:0">
+    <a href="project.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Project</a>
+    <a href="studio.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Studio</a>
+    <a href="service.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Service</a>
+    <a href="contact.html" class="nav-link text-[11px] font-medium uppercase tracking-widest text-[#c4c7c7] hover:text-white transition-colors">Contact</a>
   </div>
-  <a href="contact.html" class="text-[11px] font-medium uppercase tracking-widest border border-[#e3c282] px-7 py-3 text-[#e3e2e2] hover:bg-[#e3c282] hover:text-[#402d00] transition-all duration-300">Inquire</a>
+
+  <div id="nav-cta" class="w-[85px] hidden md:block" style="opacity:0"></div>
 </nav>
 </header>
 
